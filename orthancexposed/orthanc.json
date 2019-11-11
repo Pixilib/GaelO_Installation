@@ -1,0 +1,6 @@
+{
+        "DicomServerEnabled" : false,
+        "LuaScripts" : [
+            "/etc/share/orthanc/scripts/access.lua"
+        ]
+}
