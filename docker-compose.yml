@@ -64,7 +64,7 @@ services:
         depends_on:
         - indexgaelo
         image: phpmyadmin/phpmyadmin
-        restart: always
+        restart: unless-stopped
         ports:
         - '8081:80'
         environment:
