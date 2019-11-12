@@ -1,5 +1,5 @@
 # GaelO_DockerCompose
-Docker Compose deployment of GaelO (GaelO, Orthanc and Mysql)
+Docker Compose deployment of GaelO (GaelO, Orthanc, Mysql and PhpMyAdmin)
 
 
 docker-compose up --build
