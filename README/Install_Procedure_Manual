@@ -1,5 +1,5 @@
 *************************************************************
-**************** GAELO INSTALL PROCEDURE ********************
+**************** GAELO MANUAL INSTALL PROCEDURE *************
 *************************************************************
 
 ************************
@@ -77,7 +77,7 @@ If you need to upload documentation over 5Mb you have to increase this settings 
 - In the htaccess file if applicable
 - otherwise In WebMin=>Other=>Php Configuration=>Manage=>Ressource limit and increase post and upload max size (post value needs to be > upload value)
 
--2- Orthanc Peer Import (Not in use in GaelO 1.0)
+-2- Orthanc Peer Import (Not in use anymore in GaelO 1.0)
 To use Orthanc Peer import create another subdomain (ex orthanc.domain.com +- with SSL) 
 Make Reverse proxy (port 80/443 => 8042) : Virtualmin > (your default website) > Server Config > Edit Proxy Website
 make exposed Orthanc local adrress (ex http://localhost:8043) as destination of this subdomain
