@@ -30,7 +30,7 @@ Run Apache mod for the main site :
 Upload all GaelO files (gaelo/src) in the server's root apache folder
 
 Start the GaelO Install : 
-	- Go To http://domain/install/start.php
+	- Go To http://domain/data/install/start.php
 	- Check PHP requirement (see tips 1 if tests fails)
 	- Declare your database settings (address, login, pass...)
 	
