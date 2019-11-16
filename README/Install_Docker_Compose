@@ -10,8 +10,8 @@ Build in deamon mode:
 sudo docker-compose up --build -d
 
 Get Apache Log  :
-Error Log : docker logs -f your_php_apache_container >/dev/null
-Access Log : docker logs -f your_php_apache_container >/dev/null
+Error Log : docker logs your_php_apache_container 1>/dev/null
+Access Log : docker logs your_php_apache_container 2>/dev/null
 
 Refresh Docker Image : 
 sudo docker pull salimkanoun/gaelo
