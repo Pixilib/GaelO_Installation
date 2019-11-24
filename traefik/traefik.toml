@@ -1,0 +1,18 @@
+## static configuration
+# traefik.toml
+
+[entryPoints.web]
+  address = ":80"
+
+[entryPoints.web-secure]
+  address = ":443"
+
+[certificatesResolvers.sample.acme]
+  email = "your-email@your-domain.org"
+  storage = "acme.json"
+  [certificatesResolvers.sample.acme.httpChallenge]
+    # used during the challenge
+    entryPoint = "web"
+
+
+

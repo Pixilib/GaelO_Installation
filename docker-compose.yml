@@ -5,15 +5,23 @@ services:
     gaelo:
         image: salimkanoun/gaelo
         container_name: gaelo
-        depends_on: [indexgaelo]
+        depends_on: [indexgaelo, traefik]
         restart: unless-stopped
-        ports: ["8080:80"]
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.middlewares.gaelo-https.redirectscheme.scheme=https"
+          - "traefik.http.routers.gaelo-http.entrypoints=web"
+          - "traefik.http.routers.gaelo-http.rule=Host(`localhost`)"
+          - "traefik.http.routers.gaelo-http.middlewares=gaelo-https@docker"
+          - "traefik.http.routers.gaelo.entrypoints=web-secure"
+          - "traefik.http.routers.gaelo.rule=Host(`localhost`)"
+          - "traefik.http.routers.gaelo.tls=true"
+          - "traefik.http.routers.gaelo.tls.certresolver=default"
         volumes: ["gaelo:/gaelo/data:Z"]
     orthancexposed:
         build: orthancexposed
         container_name: orthancexposed
         restart: unless-stopped
-        ports: ["127.0.0.1:8043:8042"]
         volumes: ["storageexposed:/var/lib/orthanc/db:Z"]
         environment:
             AC_REGISTERED_USERS: "{\"internal\":\"GaelO\",\"external\":\"GaelO\"}"
@@ -29,7 +37,6 @@ services:
         container_name: orthancpacs
         depends_on: [indexorthanc]
         restart: unless-stopped
-        ports: ["127.0.0.1:8042:8042"]
         volumes: ["storagepacs:/var/lib/orthanc/db:Z"]
         environment:
             AC_REGISTERED_USERS: "{\"GaelO\":\"GaelO\",\"dicomWeb\":\"dicomWeb\"}"
@@ -63,19 +70,24 @@ services:
                 MYSQL_PASSWORD: gaelo
                 MYSQL_USER: gaelo
                 MYSQL_DATABASE: gaelo
-                MYSQL_ROOT_PASSWORD: gaelo
+                MYSQL_ROOT_PASSWORD: foo-root
         restart: unless-stopped
-    phpmyadmin:
-        container_name: phpmyadmingaelo
-        depends_on:
-        - indexgaelo
-        image: phpmyadmin/phpmyadmin
-        restart: unless-stopped
+    traefik:
+        image: traefik:2.1
+        container_name: "traefik"
+        command: 
+            --api.insecure=true 
+            --providers.docker
+            --entrypoints.web.address=:80
+            --entrypoints.web-secure.address=:443
         ports:
-        - '8081:80'
-        environment:
-            PMA_HOST: indexgaelo
-            MYSQL_ROOT_PASSWORD: gaelo   
+            - "8082:80"
+            - "443:443"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        restart: unless-stopped
+   
 
 volumes:
         storageexposed:
