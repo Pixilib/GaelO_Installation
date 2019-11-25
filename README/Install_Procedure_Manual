@@ -125,7 +125,7 @@ restart containers
 ****************
 
 Docker Install : 
-https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
 https://docs.docker.com/compose/install/
 
 Virtualmin : 
