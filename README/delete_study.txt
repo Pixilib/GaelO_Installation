@@ -14,13 +14,14 @@ SELECT `table_review_specific` FROM `visit_type` WHERE `study`="etude1"
 And Make DROP TABLE tableSpecificName for each table
 
 Remove database entries in this order
-DELETE FROM `reviews` WHERE `id_visit` IN (SELECT id_visit from visits WHERE study="etude1");
-DELETE FROM `tracker` WHERE `id_visit` IN (SELECT id_visit from visits WHERE study="etude1") OR `study`="etude1";
-DELETE FROM `documentation` WHERE `study`="etude1";
-DELETE FROM `roles` WHERE `study`="etude1";
-DELETE FROM `orthanc_series` WHERE ( orthanc_series.Study_UID IN (SELECT orthanc_studies.Study_UID FROM orthanc_studies WHERE id_visit IN ( SELECT id_visit from visits WHERE study="etude1") ));
-DELETE FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits WHERE study="etude1");
-DELETE FROM `visits` WHERE `study`="etude1";
-DELETE FROM `patients` WHERE `study`="etude1";
-DELETE FROM `visit_type` WHERE `study`="etude1";
-DELETE FROM `studies` WHERE `name`="etude1";
+DELETE FROM `reviews` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
+DELETE FROM `tracker` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY")) OR `study`="STUDY";
+DELETE FROM `documentation` WHERE `study`="STUDY";
+DELETE FROM `roles` WHERE `study`="STUDY";
+DELETE FROM `orthanc_series` WHERE `study_orthanc_id` IN ( SELECT study_orthanc_id FROM orthanc_studies WHERE id_visit IN (SELECT id FROM visit_group WHERE study="STUDY") ) ;
+DELETE FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
+DELETE FROM `visits` WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY");
+DELETE FROM `patients` WHERE `study`="STUDY";
+DELETE FROM `visit_type` WHERE `group_id` IN (SELECT id from visit_group WHERE study="STUDY");
+DELETE FROM `visit_group` WHERE study="STUDY";
+DELETE FROM `studies` WHERE `name`="STUDY";
