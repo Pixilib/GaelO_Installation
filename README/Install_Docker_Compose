@@ -15,3 +15,6 @@ Access Log : docker logs gaelo 2>/dev/null
 
 Refresh Docker Image : 
 sudo docker pull salimkanoun/gaelo
+
+Go to Bash of Container : 
+docker exec -it gaelo bash
