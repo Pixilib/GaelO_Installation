@@ -1,0 +1,22 @@
+﻿[
+  {
+    "lastName": "G",
+    "firstName": "M",
+    "gender": "Male",
+    "investigatorNumCenter": "10201",
+    "registrationDate": "07/26/2017",
+    "patientNumber": "11111102222001",
+    "dateOfBirth": "ND/12/1943",
+    "investigatorName": "DOE"
+  },
+  {
+    "lastName": "H",
+    "firstName": "J",
+    "gender": "Male",
+    "investigatorNumCenter": "10201",
+    "registrationDate": "12/10/2017",
+    "patientNumber": "11111102222002",
+    "dateOfBirth": "ND/07/1946",
+    "investigatorName": "DOE"
+  }
+]
