@@ -19,19 +19,23 @@ services:
           - "traefik.http.routers.gaelo.tls.certresolver=default"
         volumes: ["gaelo:/gaelo/data:Z"]
     orthancexposed:
-        build: orthancexposed
+        image: osimis/orthanc:20.3.1
         container_name: orthancexposed
         restart: unless-stopped
-        volumes: ["storageexposed:/var/lib/orthanc/db:Z"]
+        volumes: ["exposed_storage:/var/lib/orthanc/db:Z"]
         environment:
-            AC_REGISTERED_USERS: "{\"internal\":\"GaelO\",\"external\":\"GaelO\"}"
-            TRANSFERS_BUNDLE_DEFAULTS: "true"
+            AC_REGISTERED_USERS: |
+                {
+                    "internal":"GaelO","external":"GaelO"
+                }
+            TRANSFERS_BUNDLE_DEFAULTS: 'true'
             NAME: OrthancExposed
-            AC_AUTHENTICATION_ENABLED : "true"
+            AC_AUTHENTICATION_ENABLED: 'true'
             PEERS: |
                 {
                     "OrthancPacs": ["http://orthancpacs:8042/", "GaelO", "GaelO"]
                 }
+            DW_ENABLED: "false"
     orthancpacs:
         build: orthancpacs
         container_name: orthancpacs
