@@ -6,6 +6,8 @@
             "Host": "",
             "EnableWado": true,
             "WadoRoot": "/wado",
-            "Ssl": true
+            "Ssl": true,
+            "StudiesMetadata" : "MainDicomTags",
+            "SeriesMetadata" : "Full"
       }
 }
