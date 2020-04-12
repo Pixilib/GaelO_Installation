@@ -26,6 +26,7 @@ Azure open port 10000 Webmin for your admin IP
         RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     - HTTPS should act as a reverse proxy to GaelO container (8080) : 
+        ProxyPreserveHost On
         ProxyPass / http://127.0.0.1:8080/
         ProxyPassReverse / http://127.0.0.1:8080/
 
