@@ -3,18 +3,31 @@
 **************** GAELO DOCKER COMPOSE INSTALL PROCEDURE *****
 *************************************************************
 
-Build : 
-sudo docker-compose up --build
+********************************************
+*************** Requeriements **************
+********************************************
 
-Build in deamon mode: 
+Docker : 
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+Docker Compose :
+https://docs.docker.com/compose/install/
+
+********************************************
+********** Running commands ****************
+********************************************
+
+Build and Run in Deamon mode : 
 sudo docker-compose up --build -d
 
 Get Apache Log  :
 Error Log : docker logs gaelo 1>/dev/null
 Access Log : docker logs gaelo 2>/dev/null
 
-Refresh Docker Image : 
-sudo docker pull salimkanoun/gaelo
+Upgrade GaelO and Orthanc in Docker : 
+docker-compose down
+docker-compose pull
+docker-compose up --build -d
 
 Go to Bash of Container : 
 docker exec -it gaelo bash
