@@ -19,7 +19,7 @@ Azure open port 10000 Webmin for your admin IP
  - Edit directives : 
 
     - HTTP should be redirected to HTTPS except for ACME-challenge to retrieve Let's Encrypt Certificat 
-      Add in public_html directory directive : 
+      Add in <Directory /home/gaelo-test/public_html> : 
         RewriteEngine On
         RewriteRule ^.well-known/acme-challenge/ - [L]
         RewriteCond %{HTTPS} off
