@@ -5,13 +5,15 @@ If you want to make real deletion of a study you have to :
 
 - Get stored Orthanc Series ID related to that Study and remove them from Orthanc-Pacs
 
-SELECT `study_orthanc_id` FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits WHERE study="etude1")
+SELECT `study_orthanc_id` FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits, visit_group, visit_type WHERE visit_group.id=visit_type.group_id AND visit_type.id = visits.visit_type_id AND study="etude1")
 
 - Manually edit the database as follow  :
 
 Remove all specific table of the study, to list them : 
-SELECT `table_review_specific` FROM `visit_type` WHERE `study`="etude1"
+SELECT `table_review_specific` FROM `visit_type`, `visit_group` WHERE visit_group.id=visit_type.group_id AND study="etude1"
 And Make DROP TABLE tableSpecificName for each table
+
+//SK A CORRIGER ICI
 
 Remove database entries in this order
 DELETE FROM `reviews` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
