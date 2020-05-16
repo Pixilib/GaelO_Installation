@@ -48,5 +48,7 @@ Azure open port 10000 Webmin for your admin IP
 
 - Setup GaelO with Docker and go at https://domain.org/data/install/start.php to set your database settings
     At the end of the process remove the install folder for the docker volume
+    
+- Create a dummy vhost to catch direct ip trafic outside domain name (prevent direct IP access with non ssl)
 
 
