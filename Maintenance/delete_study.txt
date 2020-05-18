@@ -13,16 +13,14 @@ Remove all specific table of the study, to list them :
 SELECT `table_review_specific` FROM `visit_type`, `visit_group` WHERE visit_group.id=visit_type.group_id AND study="etude1"
 And Make DROP TABLE tableSpecificName for each table
 
-//SK A CORRIGER ICI
-
 Remove database entries in this order
-DELETE FROM `reviews` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
-DELETE FROM `tracker` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY")) OR `study`="STUDY";
+DELETE FROM `reviews` WHERE `id_visit` IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY"))
+DELETE FROM `tracker` WHERE `id_visit` IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY")) OR `study`="STUDY";
 DELETE FROM `documentation` WHERE `study`="STUDY";
 DELETE FROM `roles` WHERE `study`="STUDY";
-DELETE FROM `orthanc_series` WHERE `study_orthanc_id` IN ( SELECT study_orthanc_id FROM orthanc_studies WHERE id_visit IN (SELECT id FROM visit_group WHERE study="STUDY") ) ;
-DELETE FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
-DELETE FROM `visits` WHERE visit_group_id IN (SELECT id FROM visit_group WHERE study="STUDY");
+DELETE FROM `orthanc_series` WHERE `study_orthanc_id` IN ( SELECT study_orthanc_id FROM orthanc_studies WHERE `id_visit` IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY")) ;
+DELETE FROM `orthanc_studies` WHERE `id_visit` IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
+DELETE FROM `visits` WHERE visits.visit_type_id IN (SELECT visit_type.id FROM visit_type, visit_group WHERE visit_type.group_id = visit_group.id AND study="STUDY");
 DELETE FROM `patients` WHERE `study`="STUDY";
 DELETE FROM `visit_type` WHERE `group_id` IN (SELECT id from visit_group WHERE study="STUDY");
 DELETE FROM `visit_group` WHERE study="STUDY";
