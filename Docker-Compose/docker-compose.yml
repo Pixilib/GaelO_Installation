@@ -9,7 +9,7 @@ services:
         volumes: ["gaelo_storage:/gaelo/data/logs:Z"]
 
     orthancexposed:
-        image: osimis/orthanc:20.4.2
+        image: osimis/orthanc:20.5.3
         container_name: orthancexposed
         restart: unless-stopped
         volumes: ["exposed_storage:/var/lib/orthanc/db:Z"]
@@ -22,6 +22,7 @@ services:
                 {
                     "OrthancPacs": ["http://orthancpacs:8042/", "GaelO", "GaelO"]
                 }
+            ORTHANC__INGEST_TRANSCODING : "1.2.840.10008.1.2.4.57"
 
     orthancpacs:
         build: orthancpacs
