@@ -50,6 +50,7 @@ services:
             ORTHANC__MYSQL__USERNAME: "orthancPacs"
             ORTHANC__MYSQL__DATABASE: "orthancPacs"
             ORTHANC__MYSQL__PASSWORD: "sassa"
+            ORTHANC__BUILTIN_DECODER_TRANSCODER_ORDER : "Before"
 
     indexorthanc:
             image: mysql:8.0
