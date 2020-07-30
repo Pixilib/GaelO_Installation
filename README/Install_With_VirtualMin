@@ -15,6 +15,8 @@ Azure open port 10000 Webmin for your admin IP
 **********************************************
 
  - Create Virtual server with VirtualMin
+ 
+ - Activate mod_rewrite and mod_headers in Apache
 
  - Edit directives : 
 
@@ -29,6 +31,8 @@ Azure open port 10000 Webmin for your admin IP
         ProxyPreserveHost On
         ProxyPass / http://127.0.0.1:8080/
         ProxyPassReverse / http://127.0.0.1:8080/
+        RequestHeader set X-Forwarded-Port "443"
+        RequestHeader set X-Forwarded-Proto "https"
 
  - MySql setup (not needed if you have a managed database instance)
     Mysql bind-address should be open to all IP as the docker instance will access it 
