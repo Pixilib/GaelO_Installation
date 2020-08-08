@@ -7,6 +7,14 @@ services:
         restart: unless-stopped
         ports: ["127.0.0.1:8080:80"]
         volumes: ["gaelo_storage:/gaelo/data/logs:Z"]
+        
+    tus:
+        image: tusproject/tusd:v1.4.0
+        container_name: tus
+        restart: unless-stopped
+        ports: ["1080:1080"]
+        command: ["-behind-proxy","-base-path", "/tus","-hooks-dir","/srv/tusd-hooks"]
+        volumes: ["storagetus:/srv/tusd-data:Z"] 
 
     orthancexposed:
         image: osimis/orthanc:20.5.3
@@ -70,6 +78,7 @@ volumes:
         pacs_storage:
         orthanc_index:
         gaelo_storage:
+        storagetus:
 
 
 
