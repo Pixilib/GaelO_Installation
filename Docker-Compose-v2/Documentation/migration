@@ -1,0 +1,4 @@
+//Install
+docker-compose run gaelo2 php artisan migrate:fresh --seed
+//Update
+docker-compose run gaelo2 php artisan migrate

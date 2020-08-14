@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+    gaelo2:
+        image: salimkanoun/gaelo:v2-dev
+        container_name: gaelo2
+        restart: unless-stopped
+        ports: ["127.0.0.1:8080:80"]
+        environment:
+                APP_NAME: GaelO
+                APP_ENV: production
+                APP_URL: http://localhost
+                DB_CONNECTION: mysql
+                DB_HOST: gaelo_mysql
+                DB_PORT: 3306
+                DB_DATABASE: gaelo
+                DB_USERNAME: gaelo
+                DB_PASSWORD: gaelo
+                MAIL_MAILER: smtp
+                MAIL_HOST: smtp.mailtrap.io
+                MAIL_PORT: 2525
+                MAIL_USERNAME: null
+                MAIL_PASSWORD: null
+                MAIL_ENCRYPTION: null
+                MAIL_FROM_ADDRESS: null
+                MAIL_FROM_NAME: "${APP_NAME}"
+
+
+
+    gaelo_mysql:
+        image: mysql:8.0
+        container_name: gaelo_mysql
+        command: [mysqld, --default-authentication-plugin=mysql_native_password, --log-bin-trust-function-creators=1]
+        volumes: ["gaelo_mysql:/var/lib/mysql:Z"]
+        environment:
+                MYSQL_ENABLED: "true" 
+                MYSQL_PASSWORD: gaelo
+                MYSQL_USER: gaelo
+                MYSQL_DATABASE: gaelo
+                MYSQL_ROOT_PASSWORD: gaelo
+        restart: unless-stopped
+
+volumes:
+    gaelo_mysql:
+
+
+
+
