@@ -34,3 +34,7 @@ docker exec -it gaelo bash
 
 Log Collector : 
 https://logz.io/
+
+Nb : If using mysql8 with orthanc with non root user set before first run of Orthanc
+log_bin_trust_function_creators=1
+https://groups.google.com/g/orthanc-users/c/OCFFkm1qm0k/m/k3rx12UjAwAJ
