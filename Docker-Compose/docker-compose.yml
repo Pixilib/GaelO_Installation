@@ -6,6 +6,10 @@ services:
         container_name: gaelo
         restart: unless-stopped
         ports: ["127.0.0.1:8080:80"]
+        environment:
+            HOST_URL: localhost
+            HOST_PORT: 8080
+            HOST_PROTOCOL: http
         volumes: ["gaelo_storage:/gaelo/data/logs:Z"]
         
     tus:
