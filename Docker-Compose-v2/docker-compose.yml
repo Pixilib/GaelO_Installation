@@ -6,6 +6,8 @@ services:
         container_name: gaelo2
         restart: unless-stopped
         ports: ["127.0.0.1:8080:80"]
+        volumes: 
+            - .:/var/www/html
         environment:
                 APP_NAME: GaelO
                 APP_ENV: production
@@ -24,6 +26,13 @@ services:
                 MAIL_ENCRYPTION: null
                 MAIL_FROM_ADDRESS: null
                 MAIL_FROM_NAME: "${APP_NAME}"
+
+    php-queue:
+        restart: always
+        image: php:7.2-fpm
+        command: php artisan queue:work
+        volumes: 
+            - .:/var/www/html
 
 
 
