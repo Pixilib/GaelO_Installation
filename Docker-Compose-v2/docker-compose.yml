@@ -5,9 +5,8 @@ services:
         image: salimkanoun/gaelo:v2-dev
         container_name: gaelo2
         restart: unless-stopped
-        ports:
-          - "8081:80"
         volumes: ["gaelo_data:/var/www/html:Z"]
+        depends_on: [gaelo_mysql]
         environment:
                 APP_NAME: GaelO
                 APP_ENV: production
@@ -35,6 +34,7 @@ services:
                 ORTHANC_STORAGE_PORT: 8042
                 ORTHANC_STORAGE_LOGIN: 'login'
                 ORTHANC_STORAGE_PASSWORD: 'password'
+                CONTAINER_ROLE: app
         labels:
         - "traefik.enable=true"
         - "traefik.port=80"
@@ -45,6 +45,7 @@ services:
         restart: always
         image: salimkanoun/gaelo:v2-dev
         command: php artisan queue:work
+        depends_on: [gaelo_mysql]
         environment:
                 APP_NAME: GaelO
                 APP_ENV: production
@@ -62,16 +63,8 @@ services:
                 MAIL_PASSWORD: 
                 MAIL_ENCRYPTION: ssl
                 MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
-                QUEUE_CONNECTION: sync
-                GAELO_PATIENT_CODE_LENGTH: 14
-                ORTHANC_TEMPORARY_ADDRESS: 'http://'
-                ORTHANC_TEMPORARY_PORT: 8042
-                ORTHANC_TEMPORARY_LOGIN: 'login'
-                ORTHANC_TEMPORARY_PASSWORD: 'password'
-                ORTHANC_STORAGE_ADDRESS: 'http://'
-                ORTHANC_STORAGE_PORT: 8042
-                ORTHANC_STORAGE_LOGIN: 'login'
-                ORTHANC_STORAGE_PASSWORD: 'password'
+                QUEUE_CONNECTION: database
+                CONTAINER_ROLE: queue
 
     gaelo_mysql:
         image: mysql:5.7
