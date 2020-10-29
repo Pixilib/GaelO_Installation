@@ -5,7 +5,7 @@ services:
         image: salimkanoun/gaelo:v2-dev
         container_name: gaelo2
         restart: unless-stopped
-        volumes: ["gaelo_data:/var/www/html:Z"]
+        volumes: ["gaelo_data:/var/www/html/storage:Z"]
         depends_on: [gaelo_mysql]
         environment:
                 APP_NAME: GaelO
