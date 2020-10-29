@@ -19,8 +19,8 @@ services:
                 MAIL_MAILER: smtp
                 MAIL_HOST: smtp.sendgrid.net
                 MAIL_PORT: 465
-                MAIL_USERNAME: apikey
-                MAIL_PASSWORD: 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
+                MAIL_USERNAME:
+                MAIL_PASSWORD:
                 MAIL_ENCRYPTION: ssl
                 MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
                 QUEUE_CONNECTION: database
