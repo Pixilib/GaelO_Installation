@@ -93,6 +93,15 @@ services:
           - ./acme.json:/acme.json
         restart: always
 
+    tus:
+        image: tusproject/tusd:v1.4.0
+        container_name: tus
+        restart: unless-stopped
+        #ports: ["1080:1080"]
+        #peut etre sortir de api pour tus tout court
+        command: ["-behind-proxy","-base-path", "/api/tus","-hooks-dir","/srv/tusd-hooks"]
+        volumes: ["storagetus:/srv/tusd-data:Z"] 
+
 volumes:
     gaelo_mysql:
     gaelo_data:
