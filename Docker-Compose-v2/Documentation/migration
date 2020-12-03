@@ -1,5 +1,6 @@
 //Install
-docker-compose run gaelo2 php artisan migrate:fresh --seed
-docker-compose run gaelo2 php artisan passport:install
+docker exec -it gaelo2 php artisan migrate:fresh --seed
+docker exec -it gaelo2 php artisan passport:install
+
 //Update
-docker-compose run gaelo2 php artisan migrate
+docker exec -it gaelo2 php artisan migrate
