@@ -1,0 +1,7 @@
+Replication of orthanc
+
+- Transfert DICOM files using replication python script (Can be improved by multithreding uploads and deamonize it)
+
+- Check equivalence of both servers at instance level (generate a JSON file with all instances ID, should be equals for both server once replication done)
+For 800 000 instances the generated json is 10Mb so can be suitable even for large servers
+curl -u username:password http://localhost:8042/instances -o instances.json
