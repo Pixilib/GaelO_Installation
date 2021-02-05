@@ -8,35 +8,35 @@ services:
         volumes: ["gaelo_data:/var/www/html/storage:Z"]
         depends_on: [gaelo_mysql]
         environment:
-                APP_NAME: GaelO
-                APP_ENV: production
-                APP_URL: https://0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud/
-                DB_CONNECTION: mysql
-                DB_HOST: gaelo_mysql
-                DB_PORT: 3306
-                DB_DATABASE: gaelo
-                DB_USERNAME: gaelo
-                DB_PASSWORD: gaelo
-                MAIL_MAILER: smtp
-                MAIL_HOST: smtp.sendgrid.net
-                MAIL_PORT: 465
-                MAIL_USERNAME: apikey
-                MAIL_PASSWORD:
-                MAIL_ENCRYPTION: ssl
-                MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
-                QUEUE_CONNECTION: database
-                GAELO_PATIENT_CODE_LENGTH: 14
-                ORTHANC_TEMPORARY_ADDRESS: 'http://'
-                ORTHANC_TEMPORARY_PORT: 8042
-                ORTHANC_TEMPORARY_LOGIN: 'login'
-                ORTHANC_TEMPORARY_PASSWORD: 'password'
-                ORTHANC_STORAGE_ADDRESS: 'http://'
-                ORTHANC_STORAGE_PORT: 8042
-                ORTHANC_STORAGE_LOGIN: 'login'
-                ORTHANC_STORAGE_PASSWORD: 'password'
-                TUS_ADDRESS: 'http://tus'
-                TUS_PORT: 1080
-                CONTAINER_ROLE: app
+            APP_NAME: GaelO
+            APP_ENV: production
+            APP_URL: https://0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud/
+            DB_CONNECTION: mysql
+            DB_HOST: gaelo_mysql
+            DB_PORT: 3306
+            DB_DATABASE: gaelo
+            DB_USERNAME: gaelo
+            DB_PASSWORD: gaelo
+            MAIL_MAILER: smtp
+            MAIL_HOST: smtp.sendgrid.net
+            MAIL_PORT: 465
+            MAIL_USERNAME: apikey
+            MAIL_PASSWORD:
+            MAIL_ENCRYPTION: ssl
+            MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
+            QUEUE_CONNECTION: database
+            GAELO_PATIENT_CODE_LENGTH: 14
+            ORTHANC_TEMPORARY_ADDRESS: 'http://'
+            ORTHANC_TEMPORARY_PORT: 8042
+            ORTHANC_TEMPORARY_LOGIN: 'login'
+            ORTHANC_TEMPORARY_PASSWORD: 'password'
+            ORTHANC_STORAGE_ADDRESS: 'http://'
+            ORTHANC_STORAGE_PORT: 8042
+            ORTHANC_STORAGE_LOGIN: 'login'
+            ORTHANC_STORAGE_PASSWORD: 'password'
+            TUS_ADDRESS: 'http://tus'
+            TUS_PORT: 1080
+            CONTAINER_ROLE: app
         labels:
         - "traefik.enable=true"
         - "traefik.port=80"
@@ -49,24 +49,24 @@ services:
         command: php artisan queue:work
         depends_on: [gaelo_mysql]
         environment:
-                APP_NAME: GaelO
-                APP_ENV: production
-                APP_URL: https://0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud/
-                DB_CONNECTION: mysql
-                DB_HOST: gaelo_mysql
-                DB_PORT: 3306
-                DB_DATABASE: gaelo
-                DB_USERNAME: gaelo
-                DB_PASSWORD: gaelo
-                MAIL_MAILER: smtp
-                MAIL_HOST: smtp.sendgrid.net
-                MAIL_PORT: 465
-                MAIL_USERNAME: apikey
-                MAIL_PASSWORD: 
-                MAIL_ENCRYPTION: ssl
-                MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
-                QUEUE_CONNECTION: database
-                CONTAINER_ROLE: queue
+            APP_NAME: GaelO
+            APP_ENV: production
+            APP_URL: https://0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud/
+            DB_CONNECTION: mysql
+            DB_HOST: gaelo_mysql
+            DB_PORT: 3306
+            DB_DATABASE: gaelo
+            DB_USERNAME: gaelo
+            DB_PASSWORD: gaelo
+            MAIL_MAILER: smtp
+            MAIL_HOST: smtp.sendgrid.net
+            MAIL_PORT: 465
+            MAIL_USERNAME: apikey
+            MAIL_PASSWORD: 
+            MAIL_ENCRYPTION: ssl
+            MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
+            QUEUE_CONNECTION: database
+            CONTAINER_ROLE: queue
 
     gaelo_mysql:
         image: mysql:5.7
@@ -74,12 +74,12 @@ services:
         command: [mysqld, --default-authentication-plugin=mysql_native_password, --log-bin-trust-function-creators=1]
         volumes: ["gaelo_mysql:/var/lib/mysql:Z"]
         environment:
-                MYSQL_ENABLED: "true" 
-                MYSQL_PASSWORD: gaelo
-                MYSQL_USER: gaelo
-                MYSQL_DATABASE: gaelo
-                MYSQL_ROOT_PASSWORD: gaelo
-                MYSQL_ROOT_HOST: "%"
+            MYSQL_ENABLED: "true" 
+            MYSQL_PASSWORD: gaelo
+            MYSQL_USER: gaelo
+            MYSQL_DATABASE: gaelo
+            MYSQL_ROOT_PASSWORD: gaelo
+            MYSQL_ROOT_HOST: "%"
         restart: unless-stopped
         
     reverse-proxy:
@@ -148,17 +148,17 @@ services:
 
 
     indexorthanc:
-            image: mysql:8.0
-            container_name: indexorthanc
-            command: [mysqld, --default-authentication-plugin=mysql_native_password, --log-bin-trust-function-creators=1]
-            volumes: ["index:/var/lib/mysql:Z"]
-            environment:
-                    MYSQL_ENABLED: "true" 
-                    MYSQL_PASSWORD: sassa
-                    MYSQL_USER: orthancPacs
-                    MYSQL_DATABASE: orthancPacs
-                    MYSQL_ROOT_PASSWORD: foo-root
-            restart: unless-stopped
+        image: mysql:8.0
+        container_name: indexorthanc
+        command: [mysqld, --default-authentication-plugin=mysql_native_password, --log-bin-trust-function-creators=1]
+        volumes: ["index:/var/lib/mysql:Z"]
+        environment:
+            MYSQL_ENABLED: "true" 
+            MYSQL_PASSWORD: sassa
+            MYSQL_USER: orthancPacs
+            MYSQL_DATABASE: orthancPacs
+            MYSQL_ROOT_PASSWORD: foo-root
+        restart: unless-stopped
 
 volumes:
     gaelo_mysql:
