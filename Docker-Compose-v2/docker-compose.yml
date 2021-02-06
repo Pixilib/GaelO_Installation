@@ -103,7 +103,7 @@ services:
         volumes: ["storagetus:/srv/tusd-data:Z"]
 
     orthanctemporary:
-        image: osimis/orthanc:20.5.3
+        image: osimis/orthanc:21.1.7
         container_name: orthanctemporary
         restart: unless-stopped
         volumes: ["storageorthanctemporary:/var/lib/orthanc/db:Z"]
@@ -116,11 +116,10 @@ services:
                 {
                     "OrthancPacs": ["http://orthancpacs:8042/", "GaelO", "GaelO"]
                 }
-            ORTHANC__INGEST_TRANSCODING : "1.2.840.10008.1.2.4.57"
-            ORTHANC__BUILTIN_DECODER_TRANSCODER_ORDER : "Before"
+            ORTHANC__INGEST_TRANSCODING : "1.2.840.10008.1.2.4.80"
 
     orthancpacs:
-        build: orthancpacs
+        image: osimis/orthanc:21.1.7
         container_name: orthancpacs
         depends_on: [indexorthanc]
         restart: unless-stopped
@@ -144,7 +143,6 @@ services:
             ORTHANC__MYSQL__USERNAME: "orthancPacs"
             ORTHANC__MYSQL__DATABASE: "orthancPacs"
             ORTHANC__MYSQL__PASSWORD: "sassa"
-            ORTHANC__BUILTIN_DECODER_TRANSCODER_ORDER : "Before"
 
 
     indexorthanc:
