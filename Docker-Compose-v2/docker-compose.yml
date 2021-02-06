@@ -100,13 +100,13 @@ services:
         container_name: tus
         restart: unless-stopped
         command: ["-behind-proxy","-base-path", "/api/tus","-hooks-dir","/srv/tusd-hooks"]
-        volumes: ["storagetus:/srv/tusd-data:Z"]
+        volumes: ["storage_tus:/srv/tusd-data:Z"]
 
     orthanctemporary:
         image: osimis/orthanc:21.1.7
         container_name: orthanctemporary
         restart: unless-stopped
-        volumes: ["storageorthanctemporary:/var/lib/orthanc/db:Z"]
+        volumes: ["storage_orthanc_temporary:/var/lib/orthanc/db:Z"]
         environment:
             ORTHANC__NAME: "OrthancTemporary"
             ORTHANC__REGISTERED_USERS: |
@@ -121,9 +121,9 @@ services:
     orthancpacs:
         image: osimis/orthanc:21.1.7
         container_name: orthancpacs
-        depends_on: [indexorthanc]
+        depends_on: [orthanc-index]
         restart: unless-stopped
-        volumes: ["storagepacs:/var/lib/orthanc/db:Z"]
+        volumes: ["storage_pacs:/var/lib/orthanc/db:Z"]
         environment:
             ORTHANC__DICOM_SERVER_ENABLED: "false"
             ORTHANC__REGISTERED_USERS: |
@@ -139,28 +139,19 @@ services:
             ORTHANC__DICOM_WEB__STUDIESMETADATA: "MainDicomTags"
             ORTHANC__DICOM_WEB__SERIESMETADATA: "Full"
             MYSQL_PLUGIN_ENABLED: "true"
-            ORTHANC__MYSQL__HOST: "indexorthanc"
-            ORTHANC__MYSQL__USERNAME: "orthancPacs"
-            ORTHANC__MYSQL__DATABASE: "orthancPacs"
-            ORTHANC__MYSQL__PASSWORD: "sassa"
+            ORTHANC__POSTGRESQL__HOST: "orthanc-index"
 
-
-    indexorthanc:
-        image: mysql:8.0
-        container_name: indexorthanc
-        command: [mysqld, --default-authentication-plugin=mysql_native_password, --log-bin-trust-function-creators=1]
-        volumes: ["index:/var/lib/mysql:Z"]
-        environment:
-            MYSQL_ENABLED: "true" 
-            MYSQL_PASSWORD: sassa
-            MYSQL_USER: orthancPacs
-            MYSQL_DATABASE: orthancPacs
-            MYSQL_ROOT_PASSWORD: foo-root
+    orthanc-index:
+        image: postgres:13.1
         restart: unless-stopped
+        volumes: ["orthanc_index:/var/lib/postgresql/data:Z"]
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: "trust"
 
 volumes:
     gaelo_mysql:
     gaelo_data:
-    storageorthanctemporary:
-    storagepacs:
-    storagetus:
+    storage_orthanc_temporary:
+    storage_pacs:
+    storage_tus:
+    orthanc_index:
