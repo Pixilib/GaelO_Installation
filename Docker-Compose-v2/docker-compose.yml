@@ -26,16 +26,16 @@ services:
             MAIL_FROM_ADDRESS: salim.kanoun@gmail.org
             QUEUE_CONNECTION: database
             GAELO_PATIENT_CODE_LENGTH: 14
-            ORTHANC_TEMPORARY_ADDRESS: 'http://'
-            ORTHANC_TEMPORARY_PORT: 8042
-            ORTHANC_TEMPORARY_LOGIN: 'login'
-            ORTHANC_TEMPORARY_PASSWORD: 'password'
-            ORTHANC_STORAGE_ADDRESS: 'http://'
-            ORTHANC_STORAGE_PORT: 8042
-            ORTHANC_STORAGE_LOGIN: 'login'
-            ORTHANC_STORAGE_PASSWORD: 'password'
             TUS_ADDRESS: 'http://tus'
             TUS_PORT: 1080
+            ORTHANC_TEMPORARY_ADDRESS: 'http://orthanctemporary'
+            ORTHANC_TEMPORARY_PORT: 8042
+            ORTHANC_TEMPORARY_LOGIN: 'GaelO'
+            ORTHANC_TEMPORARY_PASSWORD: 'GaelO'
+            ORTHANC_STORAGE_ADDRESS: 'http://orthancpacs'
+            ORTHANC_STORAGE_PORT: 8042
+            ORTHANC_STORAGE_LOGIN: 'GaelO'
+            ORTHANC_STORAGE_PASSWORD: 'GaelO'
             CONTAINER_ROLE: app
         labels:
         - "traefik.enable=true"
@@ -138,7 +138,6 @@ services:
             ORTHANC__DICOM_WEB__SSL: "false"
             ORTHANC__DICOM_WEB__STUDIESMETADATA: "MainDicomTags"
             ORTHANC__DICOM_WEB__SERIESMETADATA: "Full"
-            MYSQL_PLUGIN_ENABLED: "true"
             ORTHANC__POSTGRESQL__HOST: "orthanc-index"
 
     orthanc-index:
