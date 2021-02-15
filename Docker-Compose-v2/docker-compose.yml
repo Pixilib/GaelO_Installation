@@ -11,6 +11,9 @@ services:
             APP_NAME: GaelO
             APP_ENV: production
             APP_URL: https://0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud/
+            APP_PORT: 443
+            APP_PROTOCOL: https
+            APP_DOMAIN: 0e44be91-4285-440b-a132-c6580851eed7.pub.instances.scw.cloud
             DB_CONNECTION: mysql
             DB_HOST: gaelo_mysql
             DB_PORT: 3306
