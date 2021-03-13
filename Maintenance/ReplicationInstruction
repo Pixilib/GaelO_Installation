@@ -10,3 +10,6 @@ curl -u username:password http://localhost:8042/instances -o instances.json
 Use a Ubuntu container in which the volume to save is mounted, map a container folder to host folder and generate the tar of the folder to save
 Here is a backup of OrthancIndex
 docker run --rm --volumes-from indexorthanc -v ~/backup:/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql
+
+--Resaure volume (to be tested)
+docker run --rm --volumes-from indexorthanc -v $(pwd):/backup ubuntu bash -c "cd /var/lib/mysql && tar xvf /backup/backup.tar --strip 1"
