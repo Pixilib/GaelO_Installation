@@ -5,3 +5,8 @@ Replication of orthanc
 - Check equivalence of both servers at instance level (generate a JSON file with all instances ID, should be equals for both server once replication done)
 For 800 000 instances the generated json is 10Mb so can be suitable even for large servers
 curl -u username:password http://localhost:8042/instances -o instances.json
+
+-Replication of Docker Volumes
+Use a Ubuntu container in which the volume to save is mounted, map a container folder to host folder and generate the tar of the folder to save
+Here is a backup of OrthancIndex
+docker run --rm --volumes-from indexorthanc -v ~/backup:/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql
