@@ -1,0 +1,26 @@
+{
+  "11223344556677" : {
+      "firstName": "A",
+      "lastName": "B",
+      "gender": "M",
+      "centerCode": 0,
+      "birthDay": 0,
+      "birthMonth": 0,
+      "birthYear": 0,
+      "registrationDate": "12/31/2000",
+      "investigatorName": "Salim",
+      "inclusionStatus": "Included"
+  },
+  "11223344556672" : {
+      "firstName": "A",
+      "lastName": "B",
+      "gender": "M",
+      "centerCode": 0,
+      "birthDay": 0,
+      "birthMonth": 0,
+      "birthYear": 0,
+      "registrationDate": "12/31/2000",
+      "investigatorName": "Salim",
+      "inclusionStatus": "Included"
+  }
+}
