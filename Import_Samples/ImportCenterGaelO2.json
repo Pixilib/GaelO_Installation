@@ -1,0 +1,10 @@
+{
+  "1" : {
+      "name": "Toulouse",
+      "countryCode": "FR"
+  },
+  "2" : {
+      "name": "Paris",
+      "countryCode": "FR"
+  }
+}
