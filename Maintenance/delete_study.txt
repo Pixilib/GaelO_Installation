@@ -5,7 +5,9 @@ If you want to make real deletion of a study you have to :
 
 - Get stored Orthanc Series ID related to that Study and remove them from Orthanc-Pacs
 
-SELECT study_orthanc_id FROM orthanc_studies WHERE id_visit IN (SELECT id_visit from visits, visit_group, visit_type WHERE visit_group.id=visit_type.group_id AND visit_type.id = visits.visit_type_id AND study="etude1")
+SELECT orthanc_series.series_orthanc_id FROM orthanc_series WHERE study_orthanc_id IN ( SELECT study_orthanc_id FROM orthanc_studies WHERE id_visit IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY")));
+
+- Delete Them from Orthanc Server using Delete series api
 
 - Manually edit the database as follow  :
 
