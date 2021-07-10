@@ -10,8 +10,11 @@ SELECT study_orthanc_id FROM orthanc_studies WHERE id_visit IN (SELECT id_visit 
 - Manually edit the database as follow  :
 
 Remove all specific table of the study, to list them : 
-SELECT table_review_specific FROM visit_type, visit_group WHERE visit_group.id=visit_type.group_id AND study="etude1"
-And Make DROP TABLE tableSpecificName for each table
+
+SELECT @specificTables := GROUP_CONCAT(table_review_specific SEPARATOR ' , ') FROM visit_type, visit_group WHERE visit_group.id=visit_type.group_id AND study="TRAILOCLORI";
+SET @sql := CONCAT('DROP TABLE IF EXISTS ', @specificTables);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
 
 Remove database entries in this order
 DELETE FROM reviews WHERE id_visit IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY"))
