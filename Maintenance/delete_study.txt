@@ -13,7 +13,7 @@ SELECT orthanc_series.series_orthanc_id FROM orthanc_series WHERE study_orthanc_
 
 Remove all specific table of the study, to list them : 
 
-SELECT @specificTables := GROUP_CONCAT(table_review_specific SEPARATOR ' , ') FROM visit_type, visit_group WHERE visit_group.id=visit_type.group_id AND study="TRAILOCLORI";
+SELECT @specificTables := GROUP_CONCAT(table_review_specific SEPARATOR ' , ') FROM visit_type, visit_group WHERE visit_group.id=visit_type.group_id AND study="STUDY";
 SET @sql := CONCAT('DROP TABLE IF EXISTS ', @specificTables);
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
