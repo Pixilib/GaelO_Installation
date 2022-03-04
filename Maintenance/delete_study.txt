@@ -19,7 +19,7 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 
 Remove database entries in this order
-DELETE FROM reviews WHERE id_visit IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY"))
+DELETE FROM reviews WHERE id_visit IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY"));
 DELETE FROM tracker WHERE id_visit IN (SELECT id_visit from visits, visit_type WHERE visits.visit_type_id=visit_type.id AND visit_type.group_id IN (SELECT id FROM visit_group WHERE study="STUDY")) OR study="STUDY";
 DELETE FROM documentation WHERE study="STUDY";
 DELETE FROM roles WHERE study="STUDY";
